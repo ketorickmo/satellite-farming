@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  color: black;
+}
+
+/* Remove all the gradients and color variables */
+body {
+  background: white;
+}
+
+/* Map container styles */
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Map controls */
+.mapboxgl-ctrl-top-right {
+  top: 10px;
+  right: 10px;
+}
+
+/* Ensure the root element takes full height */
+#__next, main {
+  height: 100%;
+  width: 100%;
+}
+
+/* Map canvas styling to ensure it renders correctly */
+.mapboxgl-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+.mapboxgl-ctrl-geocoder {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 4px;
+}
