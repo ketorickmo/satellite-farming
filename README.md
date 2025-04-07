@@ -9,21 +9,10 @@ src/
 ├── app/                    # Next.js app router pages
 │   ├── layout.tsx         # Root layout
 │   ├── page.tsx           # Home page
-│   └── paddocks/          # Paddock-related pages
-│       ├── page.tsx       # Paddocks list
-│       ├── new/           # New paddock creation
-│       └── [id]/          # Individual paddock view
-├── components/            # React components
-│   ├── map/              # Map-related components
-│   ├── paddocks/         # Paddock-related components
-│   ├── weather/          # Weather-related components
-│   └── ui/               # Reusable UI components
-└── lib/                  # Shared utilities
-    ├── api/              # API client
-    ├── hooks/            # Custom React hooks
-    ├── store/            # State management
-    ├── types/            # TypeScript types
-    └── utils/            # Utility functions
+│   ├── globals.css        # Global styles
+│   ├── components/        # React components
+│   ├── utils/            # Utility functions
+│   └── types/            # TypeScript type definitions
 ```
 
 ## Getting Started
@@ -34,10 +23,9 @@ npm install
 ```
 
 2. Set up environment variables:
-Create a `.env.local` file with:
+Create a `.env.development` file with:
 ```
 NEXT_PUBLIC_API_URL=http://localhost:5001
-NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
 ```
 
 3. Run the development server:
@@ -47,18 +35,23 @@ npm run dev
 
 ## Features
 
-- Interactive map for viewing and creating paddocks
-- NDVI data visualization
-- Weather information
+- Interactive map for viewing and creating paddocks using Mapbox GL
 - Satellite imagery integration
 - Real-time updates
 
 ## Technologies
 
-- Next.js 14
+- Next.js 15
 - TypeScript
 - Mapbox GL JS
-- TanStack Query
-- Zustand
+- React 19
 - Tailwind CSS
-- Recharts 
+
+## Development
+
+The frontend is containerized using Docker and can be run as part of the full stack using:
+```bash
+docker compose -f compose.dev.yml up
+```
+
+This will start the frontend on http://localhost:3000 
