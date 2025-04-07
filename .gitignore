@@ -75,5 +75,4 @@ frontend/.next/
 frontend/out/
 
 # Docker
-.docker/
 docker-compose.override.yml
