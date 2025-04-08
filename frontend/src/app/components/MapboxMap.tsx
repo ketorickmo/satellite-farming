@@ -1,22 +1,46 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { MapboxMapProps } from '../types/mapbox';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const MapboxMap: React.FC<MapboxMapProps> = ({
+export interface MapboxMapRef {
+  zoomIn: () => void;
+  zoomOut: () => void;
+  flyTo: (options: { center: [number, number]; zoom: number; duration?: number }) => void;
+}
+
+const MapboxMap = forwardRef<MapboxMapRef, MapboxMapProps>(({
   initialCenter = [137.915, 36.259],
   initialZoom = 9,
   mapStyle = 'mapbox://styles/mapbox/satellite-v9',
   projection = 'globe',
   enableFog = true,
   className = ''
-}) => {
+}, ref) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const [mapInitialized, setMapInitialized] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    zoomIn: () => {
+      if (mapRef.current) {
+        mapRef.current.zoomIn();
+      }
+    },
+    zoomOut: () => {
+      if (mapRef.current) {
+        mapRef.current.zoomOut();
+      }
+    },
+    flyTo: (options: { center: [number, number]; zoom: number; duration?: number }) => {
+      if (mapRef.current) {
+        mapRef.current.flyTo(options);
+      }
+    }
+  }));
 
   useEffect(() => {
     if (!mapContainerRef.current) {
@@ -98,6 +122,8 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
       />
     </div>
   );
-};
+});
+
+MapboxMap.displayName = 'MapboxMap';
 
 export default MapboxMap; 
